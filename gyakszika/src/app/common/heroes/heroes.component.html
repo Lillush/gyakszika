@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="input-group mb-3">
+      <input
+        [(ngModel)]="filterPhrase"
+        type="text"
+        class="form-control"
+        placeholder="Recipient's username"
+        aria-label="Recipient's username"
+        aria-describedby="button-addon2"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          id="button-addon2"
+        >
+          Button
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th (click)="onClickHeader($event)">Id</th>
+          <th (click)="onClickHeader($event)">Name</th>
+          <th (click)="onClickHeader($event)">Email</th>
+          <th (click)="onClickHeader($event)">Category</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let user of userList
+              | async
+              | nameFilter: filterPhrase:'name'
+              | sorter: clickedHeader
+          "
+        >
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.category }}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
